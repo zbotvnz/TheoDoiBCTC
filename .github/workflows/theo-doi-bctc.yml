@@ -1,46 +1,50 @@
-name: Theo dõi BCTC
+name: Theo Doi BCTC
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # Chạy mỗi 5 phút
-  workflow_dispatch:        # Cho phép trigger thủ công
+    - cron: '*/5 * * * *'  # Chạy mỗi 5 phút
+  workflow_dispatch:
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Java 21
-      uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: 21
-        cache: maven
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
 
-    - name: Restore hashes folder cache
-      uses: actions/cache@v3
-      with:
-        path: hashes
-        key: theo-doi-bctc-hashes
-        restore-keys: theo-doi-bctc-hashes
+      - name: Cache hashes folder
+        uses: actions/cache@v3
+        with:
+          path: hashes
+          key: theo-doi-bctc-hashes
+          restore-keys: theo-doi-bctc-hashes
 
-    - name: Ensure hashes folder exists and has a file
-      run: |
-        mkdir -p hashes
-        touch hashes/.keep
+      - name: Build with Maven
+        run: mvn clean compile
 
-    - name: Build with Maven
-      run: mvn clean compile
+      - name: Run app
+        run: mvn exec:java
 
-    - name: Run the tracker
-      run: mvn exec:java -Dexec.mainClass="com.theodoibctc.App"
+      - name: List hashes folder content after run
+        run: |
+          echo "=== List hashes folder ==="
+          ls -lh hashes || echo "hashes folder not found"
 
-    - name: Save hashes folder cache
-      if: always()
-      uses: actions/cache@v3
-      with:
-        path: hashes
-        key: theo-doi-bctc-hashes
+      - name: Show hash file content
+        run: |
+          echo "=== Content of hash files ==="
+          cat hashes/*.hash || echo "No hash files found"
+
+      - name: Save cache hashes folder
+        uses: actions/cache@v3
+        with:
+          path: hashes
+          key: theo-doi-bctc-hashes
+          restore-keys: theo-doi-bctc-hashes
