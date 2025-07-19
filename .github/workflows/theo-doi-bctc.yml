@@ -2,7 +2,7 @@ name: Theo dõi BCTC
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Chạy mỗi 5 phút
+    - cron: '*/5 * * * *' # Chạy mỗi 5 phút
   workflow_dispatch:       # Cho phép chạy thủ công
 
 jobs:
@@ -23,18 +23,18 @@ jobs:
         uses: actions/cache@v3
         with:
           path: hashes
-          key: theo-doi-bctc-hashes
-          restore-keys: theo-doi-bctc-hashes
+          key: theo-doi-bctc-hashes-${{ github.run_id }}
+          restore-keys: theo-doi-bctc-hashes-
 
       - name: Build with Maven
         run: mvn -B clean compile
 
-      - name: Run check
+      - name: Run website check
         run: mvn exec:java -Dexec.mainClass="com.theodoibctc.App"
 
       - name: Save updated hashes
-        uses: actions/cache@v3
+        uses: actions/cache/save@v3
+        if: always()
         with:
           path: hashes
           key: theo-doi-bctc-hashes-${{ github.run_id }}
-          restore-keys: theo-doi-bctc-hashes

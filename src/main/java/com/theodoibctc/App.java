@@ -14,10 +14,10 @@ public class App {
 
     private static final String CONFIG_FILE = "websites.txt";
     private static final String HASH_DIR = "hashes";
-    private static final String TOPIC = "bctc-updates"; // topic ntfy
+    private static final String TOPIC = "bctc-updates";
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Bắt đầu chạy chương trình...");
+        System.out.println("🟢 Bắt đầu chạy chương trình...");
         List<String> lines = Files.readAllLines(Paths.get(CONFIG_FILE));
         Files.createDirectories(Paths.get(HASH_DIR));
 
@@ -42,8 +42,10 @@ public class App {
                 String currentHash = Integer.toString(content.hashCode());
 
                 Path hashPath = Paths.get(HASH_DIR, stockCode + ".hash");
-                String lastHash = Files.exists(hashPath) ? Files.readString(hashPath) : "null";
-                System.out.println("Hash cũ đọc được: " + lastHash);
+                String lastHash = Files.exists(hashPath) ? Files.readString(hashPath) : null;
+
+                System.out.println("📂 Hash cũ đọc được: " + lastHash);
+                System.out.println("📝 Hash mới: " + currentHash);
 
                 if (!currentHash.equals(lastHash)) {
                     System.out.println("🔔 CÓ CẬP NHẬT cho " + stockCode);
@@ -53,7 +55,7 @@ public class App {
                 }
 
                 Files.writeString(hashPath, currentHash);
-                System.out.println("Ghi hash file tại: " + hashPath.toAbsolutePath());
+                System.out.println("📁 Ghi hash file tại: " + hashPath.toAbsolutePath());
 
             } catch (Exception e) {
                 System.err.println("❌ Lỗi với " + stockCode + ": " + e.getMessage());
