@@ -42,7 +42,8 @@ public class App {
                 String currentHash = Integer.toString(content.hashCode());
 
                 Path hashPath = Paths.get(HASH_DIR, stockCode + ".hash");
-                String lastHash = Files.exists(hashPath) ? Files.readString(hashPath) : null;
+                String lastHash = Files.exists(hashPath) ? Files.readString(hashPath) : "null";
+                System.out.println("Hash cũ đọc được: " + lastHash);
 
                 if (!currentHash.equals(lastHash)) {
                     System.out.println("🔔 CÓ CẬP NHẬT cho " + stockCode);
@@ -50,8 +51,10 @@ public class App {
                 } else {
                     System.out.println("✅ Không thay đổi.");
                 }
-                System.out.println("Ghi hash file tại: " + hashPath.toAbsolutePath());
+
                 Files.writeString(hashPath, currentHash);
+                System.out.println("Ghi hash file tại: " + hashPath.toAbsolutePath());
+
             } catch (Exception e) {
                 System.err.println("❌ Lỗi với " + stockCode + ": " + e.getMessage());
             }

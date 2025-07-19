@@ -1,50 +1,38 @@
-name: Theo Doi BCTC
+name: TheoDoiBCTC
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Chạy mỗi 5 phút
-  workflow_dispatch:
+    - cron: '*/5 * * * *'    # chạy mỗi 5 phút
+  workflow_dispatch:         # cho phép chạy thủ công
 
 jobs:
-  build-and-run:
+  build-and-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up Java 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Cache hashes folder
+      - name: Restore cache for hashes
         uses: actions/cache@v3
         with:
           path: hashes
           key: theo-doi-bctc-hashes
-          restore-keys: theo-doi-bctc-hashes
 
-      - name: Build with Maven
+      - name: Build project
         run: mvn clean compile
 
-      - name: Run app
-        run: mvn exec:java
+      - name: Run app to check updates
+        run: mvn exec:java -Dexec.mainClass=com.theodoibctc.App
 
-      - name: List hashes folder content after run
-        run: |
-          echo "=== List hashes folder ==="
-          ls -lh hashes || echo "hashes folder not found"
-
-      - name: Show hash file content
-        run: |
-          echo "=== Content of hash files ==="
-          cat hashes/*.hash || echo "No hash files found"
-
-      - name: Save cache hashes folder
+      - name: Save cache for hashes
         uses: actions/cache@v3
         with:
           path: hashes
           key: theo-doi-bctc-hashes
-          restore-keys: theo-doi-bctc-hashes
