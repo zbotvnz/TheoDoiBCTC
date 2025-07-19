@@ -1,24 +1,22 @@
 ABT|https://aquatexbentre.com/cong/|.accordion > .accordion-item > .accordion-inner > div > div:nth-child(1) > a
 ACB|https://acb.com.vn/nha-dau-tu/bao-cao-tai-chinh|#block-id-0 > section > div > div.block.mb-4 > div > div.column-2 > div > div > div
 BHA|https://thuydienbacha.vn/category/quan-he-co-dong/|#category-page > div > div > div.col.medium-8.noPadding > div.row > div:nth-child(1) > div
-BIC|
 BSR|https://bsr.com.vn/bao-cao|#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_nrma > div > div.portlet-content-container > div > div > div > div.col-md-9.main-content > div.document-list > table > tbody > tr:nth-child(2) > td:nth-child(1) > p
-CBS|
-CDN|
-CTW|
-DCM|
-DGC|
+CBS|https://www.miaduongcaobang.vn/thong_bao_c%E1%BB%95_%C4%91ong|#content\  > div:nth-child(3)
+CDN|https://danangport.com/bao-cao-dinh-ky-bat-thuong/|body > div.wrap > main > section > div > div > div > table
+CTW|https://ctn-cantho.com.vn/Bao-cao-Tai-chinh/|#body > div.row.pt-5.content-width > div:nth-child(3) > div:nth-child(1) > div.col-lg-12.col-md-12.col-sm-12.padding-l-r-0-xs.padding-l-r-0-sm.padding-l-r-0-lg.padding-l-r-0-md > div > div:nth-child(1) > div > div.news-item-content > h1 > a
+DGC|https://ducgiangchem.vn/category/quan-he-co-dong/bao-cao-tai-chinh/|#post-9361 > header > h2 > a
 DHA|
-DHC|
-DNW|
-DRI|
+DHC|https://dohacobentre.com.vn/bao-cao-tai-chinh|#page-content > div > div > div
+DNW|https://dowaco.vn/quan-he-co-dong/#bao-cao-tai-chinh|#bao-cao-tai-chinh > div.vc_tta-panel-body > div:nth-child(1) > div > div > div > div.jeg_postblock_28.jeg_postblock.jeg_module_hook.jeg_pagination_disable.jeg_col_3o3.jnews_module_376_32_687bc097d0d55 > div.jeg_block_container
+DRI|https://dri.com.vn/index.php/codong/baocao/53-bcsxkd2025|#sp-component
 EIB|
-EID|
+EID|https://heid.vn/quan-he-co-dong/|body > div.elementor.elementor-44 > section.elementor-section.elementor-top-section.elementor-element.elementor-element-7462a5f.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default > div > div > div > div.elementor-element.elementor-element-dba8a15.elementor-grid-1.tabellistpost-is2.elementor-grid-tablet-1.elementor-grid-mobile-1.elementor-widget.elementor-widget-loop-grid > div
 FRT|
 GEG|
 GHC|
 GSM|
-HAX|
+HAX|https://www.haxaco.com.vn/bao-cao-tai-chinh/2025-97/|body > div.main.newdautu > div > div > table > tbody
 HDM|
 HPD|
 HPG|
