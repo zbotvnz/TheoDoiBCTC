@@ -2,47 +2,45 @@ name: Theo dõi BCTC
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # chạy mỗi 5 phút (UTC)
-  workflow_dispatch:        # cho phép chạy thủ công từ GitHub UI
+    - cron: '*/5 * * * *'   # Chạy mỗi 5 phút
+  workflow_dispatch:        # Cho phép trigger thủ công
 
 jobs:
-  run-tracker:
+  build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout source
+      uses: actions/checkout@v3
 
-      - name: Set up Java 21
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '21'
+    - name: Setup Java 21
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 21
+        cache: maven
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+    - name: Restore hashes folder cache
+      uses: actions/cache@v3
+      with:
+        path: hashes
+        key: theo-doi-bctc-hashes
+        restore-keys: theo-doi-bctc-hashes
 
-      - name: Restore hashes folder
-        uses: actions/cache@v3
-        with:
-          path: hashes
-          key: theo-doi-bctc-hashes
-          restore-keys: theo-doi-bctc-hashes
+    - name: Ensure hashes folder exists and has a file
+      run: |
+        mkdir -p hashes
+        touch hashes/.keep
 
-      - name: Build project
-        run: mvn clean compile
+    - name: Build with Maven
+      run: mvn clean compile
 
-      - name: Run Theo dõi BCTC
-        run: mvn exec:java
+    - name: Run the tracker
+      run: mvn exec:java -Dexec.mainClass="com.theodoibctc.App"
 
-      - name: Save hashes cache
-        if: always()
-        uses: actions/cache/save@v3
-        with:
-          path: hashes
-          key: theo-doi-bctc-hashes
+    - name: Save hashes folder cache
+      if: always()
+      uses: actions/cache@v3
+      with:
+        path: hashes
+        key: theo-doi-bctc-hashes
