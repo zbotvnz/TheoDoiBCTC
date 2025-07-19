@@ -1,6 +1,6 @@
 ABT|https://aquatexbentre.com/cong/|.accordion > .accordion-item > .accordion-inner > div > div:nth-child(1) > a
-ACB|
-BHA|
+ACB|https://acb.com.vn/nha-dau-tu/bao-cao-tai-chinh|#block-id-0 > section > div > div.block.mb-4 > div > div.column-2 > div > div > div
+BHA|https://thuydienbacha.vn/category/quan-he-co-dong/|#category-page > div > div > div.col.medium-8.noPadding > div.row > div:nth-child(1) > div
 BIC|
 BSR|
 CBS|
