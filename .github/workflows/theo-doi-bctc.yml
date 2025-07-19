@@ -1,38 +1,40 @@
-name: TheoDoiBCTC
+name: Theo dõi BCTC
 
 on:
   schedule:
-    - cron: '*/5 * * * *'    # chạy mỗi 5 phút
-  workflow_dispatch:         # cho phép chạy thủ công
+    - cron: '*/5 * * * *'  # Chạy mỗi 5 phút
+  workflow_dispatch:       # Cho phép chạy thủ công
 
 jobs:
-  build-and-check:
+  run-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Setup Java 21
         uses: actions/setup-java@v3
         with:
-          distribution: temurin
-          java-version: 21
+          distribution: 'temurin'
+          java-version: '21'
 
-      - name: Restore cache for hashes
+      - name: Restore cached hashes
         uses: actions/cache@v3
         with:
           path: hashes
           key: theo-doi-bctc-hashes
+          restore-keys: theo-doi-bctc-hashes
 
-      - name: Build project
-        run: mvn clean compile
+      - name: Build with Maven
+        run: mvn -B clean compile
 
-      - name: Run app to check updates
-        run: mvn exec:java -Dexec.mainClass=com.theodoibctc.App
+      - name: Run check
+        run: mvn exec:java -Dexec.mainClass="com.theodoibctc.App"
 
-      - name: Save cache for hashes
+      - name: Save updated hashes
         uses: actions/cache@v3
         with:
           path: hashes
-          key: theo-doi-bctc-hashes
+          key: theo-doi-bctc-hashes-${{ github.run_id }}
+          restore-keys: theo-doi-bctc-hashes
