@@ -50,7 +50,7 @@ public class App {
                 } else {
                     System.out.println("✅ Không thay đổi.");
                 }
-
+                System.out.println("Ghi hash file tại: " + hashPath.toAbsolutePath());
                 Files.writeString(hashPath, currentHash);
             } catch (Exception e) {
                 System.err.println("❌ Lỗi với " + stockCode + ": " + e.getMessage());
